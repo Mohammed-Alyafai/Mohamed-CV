@@ -74,8 +74,8 @@ npx serve
 
 ## Contact
 
-- **Email:** moodalyafai65@gmail.com
-- **Phone:** +973 35694493
+- **Email:** mohammed.s.alyafai@gmail.com
+- **Phone:** +973 66626099
 - **Location:** Muharraq, Bahrain
 - **LinkedIn:** [Connect with me](https://linkedin.com/in/mohammed-saleh-alyafai)
 
