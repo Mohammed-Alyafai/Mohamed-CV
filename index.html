@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
@@ -24,6 +32,12 @@
                 <li><a href="#education">Education</a></li>
                 <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li>
+                    <a href="Mohammed_Saleh_CV.pdf" download="Mohammed_Saleh_CV.pdf"
+                       class="nav-cv-link" title="Download CV">
+                        <i class="fas fa-file-download"></i> CV
+                    </a>
+                </li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -33,21 +47,26 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
+    <section id="home" class="hero" data-section="HOME">
+        <canvas id="matrixCanvas"></canvas>
         <div class="hero-bg">
+            <div class="hero-orb"></div>
             <div class="grid-overlay"></div>
             <div class="floating-code">
-                <span class="code-line">iptables -L</span>
-                <span class="code-line">nmap -sV target</span>
-                <span class="code-line">./metasploit</span>
-                <span class="code-line">sudo apt update</span>
+                <span class="code-line code-pos-1">iptables -L</span>
+                <span class="code-line code-pos-2">nmap -sV target</span>
+                <span class="code-line code-pos-3">./metasploit</span>
+                <span class="code-line code-pos-4">sudo apt update</span>
+                <span class="code-line code-pos-5">tcpdump -i eth0</span>
+                <span class="code-line code-pos-6">ssh root@10.0.0.1</span>
             </div>
         </div>
+        <div id="particleCanvas"></div>
         <div class="hero-content">
             <div class="glitch-wrapper">
                 <h1 class="glitch" data-text="Mohammed Saleh">Mohammed Saleh</h1>
             </div>
-            <p class="hero-subtitle">Cybersecurity Student | Network Security Enthusiast</p>
+            <p class="hero-subtitle" id="typewriter"></p>
             <div class="hero-tags">
                 <span class="tag"><i class="fas fa-shield-alt"></i> Penetration Testing</span>
                 <span class="tag"><i class="fas fa-network-wired"></i> Network Security</span>
@@ -56,14 +75,19 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
                 <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                <a href="Mohammed_Saleh_CV.pdf" download="Mohammed_Saleh_CV.pdf"
+                   class="btn btn-cv" id="cvDownloadBtn">
+                    <i class="fas fa-file-download"></i>
+                    <span>Download CV</span>
+                </a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number">3.88</span>
+                    <span class="stat-number" data-target="3.88" data-decimals="2">0.00</span>
                     <span class="stat-label">GPA</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">3+</span>
+                    <span class="stat-number" data-target="3" data-decimals="0" data-suffix="+">0+</span>
                     <span class="stat-label">Projects</span>
                 </div>
                 <div class="stat">
@@ -78,7 +102,7 @@
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="about" data-section="// ABOUT ME">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// ABOUT ME</span>
@@ -111,13 +135,12 @@
                             <span class="terminal-dot green"></span>
                             <span class="terminal-title">root@security:~/portfolio</span>
                         </div>
-                        <div class="terminal-body">
-                            <p><span class="prompt">$</span> whois mohammed</p>
-                            <p class="output">Name: Mohammed Saleh</p>
-                            <p class="output">Role: Cybersecurity Student</p>
-                            <p class="output">Location: Muharraq, Bahrain</p>
-                            <p class="output">Status: Available for opportunities</p>
-                            <p><span class="prompt">$</span> <span class="cursor">_</span></p>
+                        <div class="terminal-body" id="terminalOutput">
+                            <div id="terminalLines"></div>
+                            <div class="terminal-input-line">
+                                <span class="prompt">$ </span>
+                                <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,59 +148,66 @@
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="skills" class="skills" data-section="// TECHNICAL SKILLS">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// TECHNICAL SKILLS</span>
                 <h2 class="section-title">Security Arsenal</h2>
             </div>
+            <div class="skill-filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="networking">Networking</button>
+                <button class="filter-tab" data-filter="security">Security</button>
+                <button class="filter-tab" data-filter="tools">Tools</button>
+                <button class="filter-tab" data-filter="programming">Programming</button>
+            </div>
             <div class="skills-grid">
-                <div class="skill-category">
+                <div class="skill-category" data-category="networking">
                     <div class="category-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <h3>Networking</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-name">IPv4/IPv6</span><div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div></li>
-                        <li><span class="skill-name">OSPF & BGP</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
-                        <li><span class="skill-name">VLANs & STP</span><div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div></li>
-                        <li><span class="skill-name">DHCP, NAT, ACLs</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Subnetting, routing, dual-stack config">IPv4/IPv6</span><div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Dynamic routing protocols, BGP peering">OSPF & BGP</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Layer 2 segmentation, loop prevention">VLANs & STP</span><div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Address management, port address translation">DHCP, NAT, ACLs</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
                     </ul>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category" data-category="security">
                     <div class="category-icon">
                         <i class="fas fa-shield-virus"></i>
                     </div>
                     <h3>Security</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-name">Penetration Testing</span><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></li>
-                        <li><span class="skill-name">Vulnerability Assessment</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
-                        <li><span class="skill-name">Firewalls & VPNs</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
-                        <li><span class="skill-name">SIEM & SOAR</span><div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Kali Linux, Metasploit, Nmap">Penetration Testing</span><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="CVE analysis, risk scoring, reporting">Vulnerability Assessment</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Zone-based firewalls, IPSec/WireGuard">Firewalls & VPNs</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Wazuh + Shuffle automation pipelines">SIEM & SOAR</span><div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div></li>
                     </ul>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category" data-category="tools">
                     <div class="category-icon">
                         <i class="fas fa-terminal"></i>
                     </div>
                     <h3>Tools</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-name">Kali Linux & Metasploit</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
-                        <li><span class="skill-name">Wireshark & Nmap</span><div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div></li>
-                        <li><span class="skill-name">Packet Tracer & EVE-NG</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
-                        <li><span class="skill-name">Wazuh & pfSense</span><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Exploitation framework, payload crafting">Kali Linux & Metasploit</span><div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Packet capture, network enumeration">Wireshark & Nmap</span><div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Virtual lab environments, network simulation">Packet Tracer & EVE-NG</span><div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="SIEM deployment, firewall management">Wazuh & pfSense</span><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></li>
                     </ul>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category" data-category="programming">
                     <div class="category-icon">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Programming</h3>
                     <ul class="skill-list">
-                        <li><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></li>
-                        <li><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></li>
-                        <li><span class="skill-name">HTML/CSS</span><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></li>
-                        <li><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-progress" style="width: 72%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="OOP, Android dev, backend services">Java</span><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Scripting, automation, ML model dev">Python</span><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Frontend layout, responsive design">HTML/CSS</span><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></li>
+                        <li><span class="skill-name" data-tooltip="Database queries, data modeling">SQL</span><div class="skill-bar"><div class="skill-progress" style="width: 72%"></div></div></li>
                     </ul>
                 </div>
             </div>
@@ -197,14 +227,14 @@
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="projects" class="projects" data-section="// PROJECTS">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// PROJECTS</span>
                 <h2 class="section-title">Security Projects</h2>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project="enterprise">
                     <div class="project-icon">
                         <i class="fas fa-project-diagram"></i>
                     </div>
@@ -220,7 +250,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="soc">
                     <div class="project-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -236,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="ml">
                     <div class="project-icon">
                         <i class="fas fa-brain"></i>
                     </div>
@@ -251,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="iot">
                     <div class="project-icon">
                         <i class="fas fa-server"></i>
                     </div>
@@ -270,7 +300,30 @@
         </div>
     </section>
 
-    <section id="education" class="education">
+    <!-- Project Modal Overlay -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"></div>
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <span class="modal-status" id="modalStatus"></span>
+                </div>
+            </div>
+            <p class="modal-description" id="modalDescription"></p>
+            <div class="modal-section">
+                <h3>Key Objectives</h3>
+                <ul id="modalObjectives"></ul>
+            </div>
+            <div class="modal-section">
+                <h3>Technologies Used</h3>
+                <div class="modal-tags" id="modalTags"></div>
+            </div>
+        </div>
+    </div>
+
+    <section id="education" class="education" data-section="// EDUCATION">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// EDUCATION</span>
@@ -303,7 +356,7 @@
                         <p class="timeline-institution">Muharraq Secondary School, Bahrain</p>
                         <p class="timeline-gpa">GPA: 98.4%</p>
                         <div class="achievement">
-                            <i class="fas fa trophy"></i>
+                            <i class="fas fa-trophy"></i>
                             <span>Awarded Ministry of Education Full Scholarship for academic excellence</span>
                         </div>
                     </div>
@@ -312,7 +365,7 @@
         </div>
     </section>
 
-    <section id="certifications" class="certifications">
+    <section id="certifications" class="certifications" data-section="// CERTIFICATIONS">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// CERTIFICATIONS</span>
@@ -320,61 +373,131 @@
             </div>
             <div class="cert-grid">
                 <div class="cert-card featured">
-                    <div class="cert-badge">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h3>Huawei ICT Competition</h3>
-                        <p class="cert-title">Network Track - National Finalist</p>
-                        <p class="cert-year">2024</p>
-                    </div>
-                    <div class="cert-decoration"></div>
-                </div>
-                <div class="cert-card">
-                <div class="cert-badge">
-                    <i class="fas fa-user-shield"></i>
-                </div>
-                <div class="cert-content">
-                    <h3>CC – Certified in Cybersecurity</h3>
-                    <p class="cert-title">ISC² Certification</p>
-                    <p class="cert-year">2025</p>
-                </div>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-badge">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h3>Cybersecurity Leadership & Management</h3>
-                        <p class="cert-title">Coursera/Infosec Certification</p>
-                        <p class="cert-year">Feb 2026</p>
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>Huawei ICT Competition</h3>
+                                <p class="cert-title">Network Track - National Finalist</p>
+                                <p class="cert-year">2024</p>
+                            </div>
+                            <div class="cert-decoration"></div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>Huawei ICT Competition</h3>
+                            <p class="cert-issuer">Huawei Technologies</p>
+                            <p class="cert-significance">Premier global ICT competition testing enterprise networking and security skills at national level</p>
+                            <span class="cert-status cert-status-active">Completed</span>
+                        </div>
                     </div>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-badge">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h3>HCIA-Datacom</h3>
-                        <p class="cert-title">Huawei Certified ICT Associate</p>
-                        <p class="cert-year">Expected August 2026</p>
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>CC - Certified in Cybersecurity</h3>
+                                <p class="cert-title">ISC² Certification</p>
+                                <p class="cert-year">2025</p>
+                            </div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>CC - Certified in Cybersecurity</h3>
+                            <p class="cert-issuer">ISC²</p>
+                            <p class="cert-significance">Entry-level gold standard for security professionals</p>
+                            <span class="cert-status cert-status-active">Active</span>
+                        </div>
                     </div>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-badge">
-                        <i class="fab fa-cisco"></i>
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>Cybersecurity Leadership & Management</h3>
+                                <p class="cert-title">Coursera/Infosec Certification</p>
+                                <p class="cert-year">Feb 2026</p>
+                            </div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>Cybersecurity Leadership & Management</h3>
+                            <p class="cert-issuer">Coursera / Infosec</p>
+                            <p class="cert-significance">Management-focused cert covering security governance and team leadership</p>
+                            <span class="cert-status cert-status-active">Completed</span>
+                        </div>
                     </div>
-                    <div class="cert-content">
-                        <h3>CCNA</h3>
-                        <p class="cert-title">Cisco Certified Network Associate</p>
-                        <p class="cert-year">In Progress</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>HCIA-Datacom</h3>
+                                <p class="cert-title">Huawei Certified ICT Associate</p>
+                                <p class="cert-year">Expected August 2026</p>
+                            </div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>HCIA-Datacom</h3>
+                            <p class="cert-issuer">Huawei Technologies</p>
+                            <p class="cert-significance">Enterprise datacom certification covering routing, switching, and network security</p>
+                            <span class="cert-status cert-status-progress">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fab fa-cisco"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>CCNA</h3>
+                                <p class="cert-title">Cisco Certified Network Associate</p>
+                                <p class="cert-year">In Progress</p>
+                            </div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>CCNA</h3>
+                            <p class="cert-issuer">Cisco Systems</p>
+                            <p class="cert-significance">Industry-leading associate cert for network fundamentals, switching, and routing</p>
+                            <span class="cert-status cert-status-progress">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-badge">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <div class="cert-content">
+                                <h3>OPSWAT ICIP</h3>
+                                <p class="cert-title">Industrial Cybersecurity Intro</p>
+                                <p class="cert-year">2024</p>
+                            </div>
+                        </div>
+                        <div class="cert-back">
+                            <h3>OPSWAT ICIP</h3>
+                            <p class="cert-issuer">OPSWAT Academy</p>
+                            <p class="cert-significance">Foundational OT/ICS security cert covering critical infrastructure protection</p>
+                            <span class="cert-status cert-status-active">Active</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" data-section="// CONTACT">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">// CONTACT</span>
@@ -410,8 +533,17 @@
                         </div>
                     </a>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/mohammed-alyafai-0a09b83b0/" class="social-link" title="LinkedIn" id="linkedin-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/in/mohammed-alyafai-0a09b83b0/" class="social-link" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/mohammed-alyafai" class="social-link" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="mailto:mohammed.s.alyafai@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    <div class="cv-download-contact">
+                        <a href="Mohammed_Saleh_CV.pdf" download="Mohammed_Saleh_CV.pdf"
+                           class="btn btn-cv-contact">
+                            <i class="fas fa-file-download"></i>
+                            Download CV
+                        </a>
+                        <span class="cv-hint">PDF · Updated 2026</span>
                     </div>
                 </div>
             </div>
@@ -425,6 +557,11 @@
                     <span class="logo-bracket">&lt;</span>MS<span class="logo-bracket">/&gt;</span>
                 </div>
                 <p>Cybersecurity Student | Building Secure Digital Futures</p>
+                <div class="footer-cv">
+                    <a href="Mohammed_Saleh_CV.pdf" download="Mohammed_Saleh_CV.pdf" class="footer-cv-link">
+                        <i class="fas fa-file-download"></i> mohammed_saleh_cv.pdf
+                    </a>
+                </div>
                 <div class="footer-bottom">
                     <p>&copy; 2026 Mohammed Saleh. All rights reserved.</p>
                     <p class="terminal-footer">root@portfolio:~$ ./exit</p>
@@ -432,6 +569,18 @@
             </div>
         </div>
     </footer>
+
+    <div class="cv-terminal-overlay" id="cvTerminalOverlay">
+        <div class="cv-terminal-box">
+            <div class="cv-terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="cv-terminal-title">root@portfolio:~/secure-transfer</span>
+            </div>
+            <div class="cv-terminal-body" id="cvTerminalBody"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
